@@ -57,8 +57,15 @@ app.use((error, req, res, next) => {
 
 mongoose.connect('mongodb+srv://aman:snZ5L0a4JMbsXqWG@primary.u62r1.mongodb.net/feeds?retryWrites=true&w=majority', {useUnifiedTopology: true, useNewUrlParser: true})
 .then(res => {
-    console.log('Connected')
-    app.listen(8080);
+    console.log('Http Server Ready')
+    const server = app.listen(8080);
+
+    const io = require('./socket').init(server)
+
+    //whenever a new client connexts to us.
+    io.on("connection", socket => {
+        console.log('Client Connected')
+    })
 })
 .catch(err => {
     console.log('Connection Error', err)
