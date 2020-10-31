@@ -55,7 +55,7 @@ app.use((error, req, res, next) => {
     })
 })
 
-mongoose.connect('mongodb+srv://aman:snZ5L0a4JMbsXqWG@primary.u62r1.mongodb.net/feeds?retryWrites=true&w=majority', {useUnifiedTopology: true, useNewUrlParser: true})
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PWD}@primary.u62r1.mongodb.net/${process.env.DB_PROD}?retryWrites=true&w=majority`, {useUnifiedTopology: true, useNewUrlParser: true})
 .then(res => {
     console.log('Http Server Ready')
     const server = app.listen(8080);
